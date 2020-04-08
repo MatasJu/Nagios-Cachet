@@ -7,9 +7,9 @@ sudo apt update && apt install -y \
 	apt clean && rm -Rf /var/lib/apt/lists/*
 	
 cd /tmp
-wget -O nagioscore.tar.gz https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.5.tar.gz
+wget -N -O nagioscore.tar.gz https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.5.tar.gz
 
-tar xzvf nagioscore.tar.gz nagioscore -C /tmp/nagioscore
+tar xzvf nagioscore.tar.gz -C /tmp/nagioscore
 
 cd /tmp/nagioscore-nagios-4.4.5
 ./configure --with-httpd-conf=/etc/apache2/sites-enabled
@@ -32,7 +32,7 @@ htpasswd -bc /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
 # Nagios Plugins
 
 cd /tmp
-wget --no-check-certificate -O nagios-plugins.tar.gz https://github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz
+wget -N --no-check-certificate -O nagios-plugins.tar.gz https://github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz
 tar zxvf nagios-plugins.tar.gz 
 
 cd /tmp/nagios-plugins-release-2.2.1
