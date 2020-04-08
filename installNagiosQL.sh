@@ -2,22 +2,16 @@
 
 #prereq
 apt update && apt install -y \
-	mariadb-server php-xml
+	mariadb-server php-xml php-pear php-mysql
 	
-	
-cd /tmp/
-wget http://pear.php.net/go-pear.phar
-php go-pear.phar
-
-
-
 # nagiosql 
-cd /var/www/html/
+cd /usr/local/nagios/share
 
-wget -N -O nagiosql.tar.gz https://gitlab.com/wizonet/nagiosql/-/archive/3.4.1/nagiosql-3.4.1.tar.gz
+wget -N nagiosql.tar.gz https://gitlab.com/wizonet/nagiosql/-/archive/3.4.1/nagiosql-3.4.1.tar.gz
 tar xzvf nagiosql.tar.gz
-mv nagiosql-3.4.1/* .
-rmdir nagiosql-3.4.1/
+mv nagiosql-3.4.1/* webadmin
+rm -rf nagiosql-3.4.1/
 
+echo "reboot the system"
 
 # got to //<host>/install/index.php
