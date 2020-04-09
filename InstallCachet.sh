@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_LOCATION = $(PWD)
+SCRIPT_LOCATION = "$(PWD)"
 cd /var/www
 git clone https://github.com/cachethq/Cachet.git
 cd Cachet
