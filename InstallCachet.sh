@@ -1,6 +1,8 @@
 #!/bin/bash
 
-SCRIPT_LOCATION="$(pwd)"
+SCRIPT_LOCATION = "$(PWD)"
+
+apt update && install php-mbstring
 
 cd /var/www
 git clone https://github.com/cachethq/Cachet.git
