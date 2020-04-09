@@ -15,3 +15,13 @@ cp $SCRIPT_LOCATION/.env .
 
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 composer install --no-dev -o
+php artisan key:generate
+
+a2dissite 000-default
+systemctl reload apache2
+
+cp $SCRIPT_LOCATION/cachet-config.conf .
+a2ensite cachet
+
+systemctl reload apache2
+
