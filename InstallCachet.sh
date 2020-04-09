@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_LOCATION = "$(PWD)"
+SCRIPT_LOCATION = "$(pwd)"
 
 apt update && install php-mbstring
 
