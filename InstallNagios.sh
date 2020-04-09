@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#set timezone for host
+timedatectl set-timezone Europe/Berlin
+
 # Nagios Core and Nagios Plugins prerequisites 
 sudo apt update && apt install -y \
 	git autoconf gcc libc6 make wget unzip apache2 apache2-utils php libgd-dev  \
