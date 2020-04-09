@@ -20,7 +20,7 @@ php artisan key:generate
 a2dissite 000-default
 systemctl reload apache2
 
-cp $SCRIPT_LOCATION/cachet-config.conf .
+cp $SCRIPT_LOCATION/cachet.conf .
 a2ensite cachet
 
 systemctl reload apache2
