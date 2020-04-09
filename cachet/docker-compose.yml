@@ -10,8 +10,10 @@ services:
         restart: always
     cachet:
          image: cachethq/docker:latest
+         args:
+             - cachet_ver=v2.3.10
          ports:
-             - 8000:8000
+             - 80:8000
          links:
              - postgres:postgres
          environment:
