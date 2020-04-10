@@ -1,4 +1,6 @@
 #!/bin/bash
+NAGIOS_USER='nagiosadmin'
+NAGIOS_PASSWORD='nagiosadmin'
 SCRIPT_LOCATION="$(pwd)"
 #set timezone for host
 timedatectl set-timezone Europe/Berlin
@@ -21,7 +23,7 @@ make all
 make install-groups-users
 usermod -a -G nagios www-data
 
-make install
+make install 
 make install-daemoninit
 make install-commandmode
 make install-config
@@ -30,26 +32,21 @@ make install-webconf
 a2enmod rewrite
 a2enmod cgi
 
-htpasswd -bc /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
+htpasswd -bc /usr/local/nagios/etc/htpasswd.users $NAGIOS_USER $NAGIOS_PASSWORD
 
 # Nagios Plugins
 
 cd $SCRIPT_LOCATION
-wget -N --no-check-certificate nagios-plugins.tar.gz https://github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz
+wget --no-check-certificate -O nagios-plugins.tar.gz https://github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz
 tar zxvf nagios-plugins.tar.gz 
 
-cd /nagios-plugins-release-2.2.1
+cd nagios-plugins-release-2.2.1
 ./tools/setup
 ./configure
 make
 make install
 
-
-
 echo 'date.timezone = "Europe/Berlin"' >> /etc/php/7.3/apache2/php.ini 
 
 systemctl enable apache2.service && systemctl restart apache2.service
-
-systemctl enable nagios.service && systemctl restart nagios.service
-
 systemctl enable nagios.service && systemctl restart nagios.service

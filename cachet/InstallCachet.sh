@@ -1,9 +1,10 @@
-@@ -1,27 +0,0 @@
 #!/bin/bash
 
 SCRIPT_LOCATION="$(pwd)"
+DB_ROOT_PASS=nagiosadmin
 
-apt update && install php-mbstring php-apcu php-apcu-bc
+apt update && apt install -y php-mbstring php-apcu php-apcu-bc && \
+	apt clean && rm -Rf /var/lib/apt/lists/*
 
 
 mysql -u root -p -e "create database cachet"
@@ -12,7 +13,7 @@ cd /var/www
 git clone https://github.com/cachethq/Cachet.git
 cd Cachet
 
-git checkout v2.4
+git checkout 2.4
 
 cp $SCRIPT_LOCATION/.env .
 
@@ -22,14 +23,12 @@ composer install --no-dev -o
 
 echo "dont configure!"
 php artisan cachet:install
-php artisan key:generate
 
 chmod -R 777 storage
 rm -rf bootstrap/cache/*
 chmod -R 777 bootstrap/
 
 a2dissite 000-default
-systemctl reload apache2
 
 cp $SCRIPT_LOCATION/cachet.conf /etc/apache2/sites-available/
 a2ensite cachet
