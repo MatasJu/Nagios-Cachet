@@ -8,9 +8,10 @@ timedatectl set-timezone Europe/Berlin
 # Nagios Core and Nagios Plugins prerequisites 
 sudo apt update && apt install -y \
 	git autoconf gcc libc6 make wget unzip apache2 apache2-utils php libgd-dev  \
-    libmcrypt-dev libssl-dev bc gawk dc build-essential snmp libnet-snmp-perl gettext && \
+    libmcrypt-dev libssl-dev bc gawk dc build-essential snmp libnet-snmp-perl gettext mosquitto-clients python3-pip && \
 	apt clean && rm -Rf /var/lib/apt/lists/*
-	
+
+sudo pip3 install paho-mqtt
 
 wget -O nagioscore.tar.gz https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.5.tar.gz
 
